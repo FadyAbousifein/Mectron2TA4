@@ -25,30 +25,14 @@ void stateToggle() {
     if(state == 0) { // Red Led blink on and off every 1s 
         ledR = !ledR; 
     } else if (state == 1) { // Red <-> Green every 1s
-        if(tracker == 0) {
-            ledR = 1; 
-            ledG = 0; 
-        } else if (tracker == 1) {
-            ledR = 0; 
-            ledG = 1; 
-        }
+        ledR = (((tracker + 1) % 2) == 1);
+        ledG = (((tracker + 1) % 2) == 0);
 
         tracker = (tracker + 1) % 2; // cycle between two phases 
     } else { // state 2: Red on 1s, red off and wait 1s and repeat for green
-        if (tracker == 0) {
-            ledR = 1; 
-            ledG = 0; 
-        } else if (tracker == 1) {
-            ledR = 0; 
-            ledG = 0; 
-        } else if (tracker == 2) {
-            ledG = 1; 
-            ledR = 0; 
-        } else {
-            ledR = 0; 
-            ledG = 0; 
-        }
-
+        ledR = (((tracker + 1) % 4) == 1);
+        ledG = (((tracker + 1) % 4) == 3);
+       
         tracker = (tracker + 1) % 4; // cycle through 4 phases; 
     }
 }
